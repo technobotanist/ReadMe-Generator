@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHub Profile README Worksheet • NC State Workshop</title>
+  <style>
+    :root{
+      --bg:#0b0f14;--panel:#121823;--muted:#94a3b8;--text:#e5e7eb;--accent:#e11d48;--ok:#10b981;--warn:#f59e0b;--border:#243042;
+      --code:#0f172a;--pill:#0e1520;--link:#60a5fa
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    a{color:var(--link)}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:linear-gradient(180deg,rgba(11,15,20,.98),rgba(11,15,20,.92));backdrop-filter:saturate(140%) blur(6px);border-bottom:1px solid var(--border);z-index:5}
+    header .bar{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px 24px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .key{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 20deg,var(--accent),#f43f5e,#fb7185,#f43f5e);box-shadow:0 0 0 2px #0003}
+    .brand h1{font-size:16px;margin:0;font-weight:700}
+    .signin{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--border);background:var(--pill);padding:8px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .pill button{all:unset;cursor:pointer;color:var(--text);padding:4px 8px;border-radius:8px;background:#1f2937}
+    .ok{color:var(--ok)}.warn{color:var(--warn)}
+
+    main{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;padding:24px}
+    @media (max-width:960px){main{grid-template-columns:1fr;}}
+
+    section{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+    section header{position:unset;background:none;border:0}
+    h2{font-size:18px;margin:0}
+    .pad{padding:20px}
+
+    .grid{display:grid;gap:12px}
+    .grid.two{grid-template-columns:1fr 1fr}
+    .grid.three{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:700px){.grid.two,.grid.three{grid-template-columns:1fr}}
+
+    label{font-size:12px;color:var(--muted)}
+    input,textarea,select{width:100%;background:#0e1520;border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font:inherit}
+    textarea{min-height:90px;resize:vertical}
+
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{appearance:none;border:1px solid var(--border);background:#0f172a;color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer}
+    .btn.primary{background:var(--accent);border-color:#000;color:#fff}
+    .btn.ghost{background:transparent}
+
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Liberation Mono",Consolas,monospace}
+    .preview{height:260px;background:var(--code);border:1px solid var(--border);border-radius:10px;padding:10px;overflow:auto;white-space:pre-wrap}
+
+    .sticky-actions{position:sticky;bottom:0;background:linear-gradient(0deg,rgba(11,15,20,1),rgba(11,15,20,.7));padding:10px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap}
+
+    .small{font-size:12px;color:var(--muted)}
+    .hr{height:1px;background:var(--border);margin:16px 0}
+    details{border:1px dashed var(--border);border-radius:12px;padding:10px}
+    summary{cursor:pointer}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar wrap">
+      <div class="brand"><div class="key"></div><h1>Git & README Workshop • NC State</h1></div>
+      <div class="signin">
+        <div class="pill" id="geminiPill">Gemini: <strong id="geminiStatus" class="warn">Not confirmed</strong> <button onclick="openAndMark('gemini')">Open</button> <button onclick="confirmSigned('gemini')">Confirm</button></div>
+        <div class="pill" id="ghPill">GitHub Enterprise: <strong id="ghStatus" class="warn">Not confirmed</strong> <button onclick="openAndMark('gh')">Open</button> <button onclick="confirmSigned('gh')">Confirm</button></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Worksheet -->
+    <section>
+      <div class="pad">
+        <h2>📄 GitHub Profile README Worksheet</h2>
+        <p class="small">Fill this out. Your answers build a <em>pre‑filled Gemini prompt</em> to generate a polished README. Sections left blank are omitted by the model.</p>
+        <div class="hr"></div>
+
+        <div class="grid two">
+          <div>
+            <label>Name</label>
+            <input id="name" placeholder="Ada Lovelace" />
+          </div>
+          <div>
+            <label>Email</label>
+            <input id="email" placeholder="ada@ncsu.edu" />
+          </div>
+          <div>
+            <label>LinkedIn URL</label>
+            <input id="linkedin" placeholder="https://www.linkedin.com/in/your-handle" />
+          </div>
+          <div>
+            <label>GitHub Enterprise URL</label>
+            <input id="github" placeholder="https://github.ncsu.edu/your-handle" />
+          </div>
+          <div>
+            <label>Portfolio / Personal Site</label>
+            <input id="portfolio" placeholder="https://your-site.dev" />
+          </div>
+          <div>
+            <label>Field or Major</label>
+            <input id="field" placeholder="Design • CS • Biology • …" />
+          </div>
+        </div>
+
+        <div class="grid two" style="margin-top:10px">
+          <div>
+            <label>What are you learning now?</label>
+            <textarea id="learning" placeholder="Right now, I’m learning …"></textarea>
+          </div>
+          <div>
+            <label>Favorite topic/class (and why)</label>
+            <textarea id="favorite" placeholder="My favorite class is … because …"></textarea>
+          </div>
+        </div>
+
+        <div class="grid two" style="margin-top:10px">
+          <div>
+            <label>Co‑curricular activities / jobs</label>
+            <textarea id="activities" placeholder="Clubs, labs, internships, teams…"></textarea>
+          </div>
+          <div>
+            <label>Hobbies / interests</label>
+            <textarea id="hobbies" placeholder="In my free time I …"></textarea>
+          </div>
+        </div>
+
+        <div class="grid two" style="margin-top:10px">
+          <div>
+            <label>Skills (comma‑separated)</label>
+            <input id="skills" placeholder="project mgmt, writing, research, 3D, …" />
+          </div>
+          <div>
+            <label>Technologies / tools (comma‑separated)</label>
+            <input id="tools" placeholder="Python, VS Code, Unity, Blender, …" />
+          </div>
+        </div>
+
+        <details style="margin-top:14px">
+          <summary>➕ Add projects (name • link • 1‑sentence)</summary>
+          <div id="projects"></div>
+          <div class="row" style="margin-top:8px">
+            <button class="btn" onclick="addProject()">Add Project</button>
+          </div>
+        </details>
+
+        <div class="grid two" style="margin-top:10px">
+          <div>
+            <label>Goals (1–2 bullets)</label>
+            <textarea id="goals" placeholder="Ship a portfolio site; learn Three.js"></textarea>
+          </div>
+          <div>
+            <label>Fun fact</label>
+            <textarea id="fun" placeholder="I’ve biked across NC."></textarea>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+        <h3 style="margin:10px 0 6px">🎛️ Personalization (baked into the prompt)</h3>
+        <div class="grid three">
+          <div>
+            <label>Tone</label>
+            <select id="tone">
+              <option>professional</option>
+              <option>friendly</option>
+              <option>concise</option>
+              <option>enthusiastic</option>
+              <option>technical</option>
+            </select>
+          </div>
+          <div>
+            <label>Emoji usage</label>
+            <select id="emoji">
+              <option>none</option>
+              <option>light (headings only)</option>
+              <option>moderate</option>
+              <option>energetic</option>
+            </select>
+          </div>
+          <div>
+            <label>Visual style</label>
+            <select id="visual">
+              <option>minimal</option>
+              <option>icons in section headers</option>
+              <option>emoji bullets</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid two" style="margin-top:10px">
+          <div>
+            <label>Color scheme preference (descriptive)</label>
+            <input id="colors" placeholder="dark, high‑contrast; or light, minimal; etc." />
+          </div>
+          <div>
+            <label>Writing flourishes</label>
+            <input id="flavor" placeholder="short sentences, active verbs, no jargon" />
+          </div>
+        </div>
+
+        <div class="sticky-actions">
+          <button class="btn" onclick="copyPrompt()">Copy Prompt</button>
+          <button class="btn" onclick="downloadPrompt()">Download prompt.txt</button>
+          <button class="btn primary" onclick="openGemini()">Open Gemini & paste</button>
+          <span class="small">Then: <a href="https://github.ncsu.edu/new" target="_blank">create a new repo on github.ncsu.edu</a> and add your generated <code>README.md</code>.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prompt Live Output & Preview -->
+    <section>
+      <div class="pad">
+        <h2>🧾 Prompt Receipt (live)</h2>
+        <p class="small">This is the exact prompt you’ll send to Gemini to generate your README.</p>
+        <textarea id="promptOut" class="mono" spellcheck="false"></textarea>
+        <div class="hr"></div>
+        <h3 style="margin:0 0 8px">👁️ Preview (rendered Markdown)</h3>
+        <div id="render" class="preview mono"></div>
+      </div>
+    </section>
+  </main>
+
+  <section class="wrap" style="margin-bottom:40px">
+    <div class="small">Resources: <a href="https://go.ncsu.edu/github-desktop" target="_blank">GitHub Desktop</a> • <a href="https://code.visualstudio.com/" target="_blank">VS Code</a> • <a href="https://www.lib.ncsu.edu/the-studios" target="_blank">The Studios @ NCSU Libraries</a></div>
+  </section>
+
+  <script>
+    const $ = (id)=>document.getElementById(id);
+
+    // Sign‑in helper toggles (user‑confirmed)
+    function openAndMark(which){
+      if(which==='gemini') window.open('https://gemini.google.com/app','_blank');
+      if(which==='gh') window.open('https://github.ncsu.edu','_blank');
+    }
+    function confirmSigned(which){
+      const key = which==='gemini' ? 'geminiOk' : 'ghOk';
+      localStorage.setItem(key,'1');
+      paintSignin();
+    }
+    function paintSignin(){
+      const g = localStorage.getItem('geminiOk')==='1';
+      const h = localStorage.getItem('ghOk')==='1';
+      $('geminiStatus').textContent = g? 'Confirmed' : 'Not confirmed';
+      $('geminiStatus').className = g? 'ok' : 'warn';
+      $('ghStatus').textContent = h? 'Confirmed' : 'Not confirmed';
+      $('ghStatus').className = h? 'ok' : 'warn';
+    }
+
+    // Projects UI
+    function addProject(data={name:'',link:'',desc:''}){
+      const idx = document.querySelectorAll('.proj').length;
+      const wrap = document.createElement('div');
+      wrap.className = 'proj';
+      wrap.style.marginTop = '10px';
+      wrap.innerHTML = `
+        <div class="grid two">
+          <div><label>Project name</label><input data-idx="${idx}" data-k="name" value="${escapeHtml(data.name)}" /></div>
+          <div><label>Link (optional)</label><input data-idx="${idx}" data-k="link" placeholder="https://…" value="${escapeHtml(data.link)}" /></div>
+        </div>
+        <div style="margin-top:8px"><label>One‑sentence summary</label><textarea data-idx="${idx}" data-k="desc">${escapeHtml(data.desc)}</textarea></div>
+        <div class="row" style="margin:8px 0 0"><button class="btn" onclick="this.closest('.proj').remove(); save(); build();">Remove</button></div>
+      `;
+      $('projects').appendChild(wrap);
+      wrap.querySelectorAll('input,textarea').forEach(el=>el.addEventListener('input',()=>{save();build();}));
+      save();build();
+    }
+
+    // State
+    const fields = ['name','email','linkedin','github','portfolio','field','learning','favorite','activities','hobbies','skills','tools','goals','fun','tone','emoji','visual','colors','flavor'];
+
+    function save(){
+      const state = {};
+      fields.forEach(k=> state[k] = $(k).value);
+      state.projects = Array.from(document.querySelectorAll('.proj')).map(p=>({
+        name: p.querySelector('[data-k="name"]').value.trim(),
+        link: p.querySelector('[data-k="link"]').value.trim(),
+        desc: p.querySelector('[data-k="desc"]').value.trim(),
+      }));
+      localStorage.setItem('worksheet', JSON.stringify(state));
+    }
+
+    function load(){
+      const raw = localStorage.getItem('worksheet');
+      if(!raw) return;
+      try{
+        const s = JSON.parse(raw);
+        fields.forEach(k=>{ if(s[k]!==undefined) $(k).value = s[k]; });
+        (s.projects||[]).forEach(addProject);
+      }catch(e){}
+    }
+
+    function build(){
+      // Build the pre‑filled prompt EXACTLY as specified
+      const s = collect();
+      const preface = `📄 GitHub Profile README Worksheet
+Create a polished, upload-ready \`README.md\` for a GitHub profile using the data below. Use clean, valid GitHub-flavored Markdown. Do not use placeholders like \`[Your link here]\`; omit sections without content. Follow this structure exactly:
+
+1. \`#\` H1 title with name
+2. Contact block: Email and Markdown links to GitHub, LinkedIn, Portfolio
+3. \`## 🧠 About Me\` – Write 3–5 sentence paragraph
+4. \`## 🔍 Projects & Passions\` – Bullet list: \`- **[Project Name](link)** – 1-sentence summary\`
+5. \`## ⚙️ Tools & Skills\` – Two bullets: \`**Skills:**\` and \`**Technologies:**\`
+6. \`## 🎯 Goals\` – 1–2 bullets
+7. \`## 🎉 Fun Fact\` – 1 bullet
+
+### Input:
+### Fill out and paste below:`;
+
+      const lines = [
+        `1. Name: ${s.name}`,
+        `2. Email: ${s.email}`,
+        s.linkedin? `3. LinkedIn URL: ${s.linkedin}`: ``,
+        s.github? `4. GitHub URL: ${s.github}`: ``,
+        s.portfolio? `5. Personal site/portfolio URL (if any): ${s.portfolio}`: ``,
+        s.field? `6. Field or major: ${s.field}`: ``,
+        s.learning? `7. What are you studying or learning now? ${s.learning}`: ``,
+        s.favorite? `8. Favorite topic or class (and why): ${s.favorite}`: ``,
+        s.activities? `9. Co-curricular activities or jobs: ${s.activities}`: ``,
+        s.hobbies? `10. Hobbies/interests: ${s.hobbies}`: ``,
+        s.skills? `11. Technical or creative skills: ${s.skills}`: ``,
+        s.tools? `12. Tools or platforms used: ${s.tools}`: ``,
+        s.projects.length? `13. Projects you're proud of (name + 1-sentence summary + link if any):
+${s.projects.map(p=>` - ${p.name}${p.link?` (${p.link})`:''}: ${p.desc}`).join('
+')}`: ``,
+        s.goals? `14. Current goals: ${s.goals}`: ``,
+        s.fun? `15. Fun fact: ${s.fun}`: ``,
+        `
+### Personalization preferences:
+- Tone: ${s.tone}
+- Emoji usage: ${s.emoji}
+- Visual style: ${s.visual}
+- Color scheme: ${s.colors}
+- Writing flourishes: ${s.flavor}`
+      ].filter(Boolean).join('
+');
+
+      const prompt = preface + '
+
+' + lines + '
+';
+      $('promptOut').value = prompt;
+      $('render').textContent = prompt; // keep as mono preview (not executing markdown for safety)
+    }
+
+    function collect(){
+      const s = {};
+      fields.forEach(k=> s[k] = $(k).value.trim());
+      s.projects = Array.from(document.querySelectorAll('.proj')).map(p=>({
+        name: p.querySelector('[data-k="name"]').value.trim(),
+        link: p.querySelector('[data-k="link"]').value.trim(),
+        desc: p.querySelector('[data-k="desc"]').value.trim(),
+      })).filter(p=>p.name||p.desc||p.link);
+      return s;
+    }
+
+    function escapeHtml(str=''){return str.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+
+    function copyPrompt(){
+      $('promptOut').select();
+      document.execCommand('copy');
+      toast('Prompt copied. Open Gemini to paste.');
+    }
+
+    function downloadPrompt(){
+      const blob = new Blob([$('
+promptOut').value],{type:'text/plain'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'readme_prompt.txt';
+      document.body.appendChild(a);a.click();a.remove();
+    }
+
+    function openGemini(){
+      copyPrompt();
+      window.open('https://gemini.google.com/app','_blank');
+    }
+
+    // Autosave & live build
+    document.querySelectorAll('input,textarea,select').forEach(el=>{
+      el.addEventListener('input',()=>{save();build();});
+      el.addEventListener('change',()=>{save();build();});
+    });
+
+    // Initial
+    load();
+    if(document.querySelectorAll('.proj').length===0) addProject();
+    paintSignin();
+    build();
+
+    // Tiny toast
+    function toast(msg){
+      const t=document.createElement('div');
+      t.textContent=msg; t.style.cssText='position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#111827;color:#e5e7eb;border:1px solid #374151;padding:10px 14px;border-radius:10px;z-index:99';
+      document.body.appendChild(t); setTimeout(()=>t.remove(),1600);
+    }
+  </script>
+</body>
+</html>
