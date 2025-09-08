@@ -1,310 +1,164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NC State • README Prompt Workshop</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <!-- External stylesheet (create style.css with the contents found at the very bottom of this file) -->
+  <title>NCSU • README Prompt Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Inline fallback so the preview still looks good in this single-file canvas.
-       For deployment, MOVE these styles into style.css (provided below). */
-    :root{--fg:#eef2f3;--muted:#bac7cf;--accent:#6ddbae;--accent2:#ff58a7;--card:#1f2224;--ink:#181a1b}
-    html,body{margin:0}
-    body{background:#181a1b;min-height:100vh;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;color:var(--fg);overflow-x:hidden}
-    #shader-bg{position:fixed;inset:0;z-index:0;pointer-events:none;display:block}
-    header{position:sticky;top:0;z-index:2;background:linear-gradient(180deg, #101112 0%, #101112cc 70%, #10111200 100%);backdrop-filter:saturate(120%) blur(6px);border-bottom:1px solid #ffffff10}
-    .wrap{max-width:1100px;margin:0 auto;padding:16px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand h1{font-size:1.25rem;margin:0;letter-spacing:.3px}
-    .badge{display:inline-flex;align-items:center;gap:.45rem;background:#ffffff10;border:1px solid #ffffff14;padding:.35rem .6rem;border-radius:999px;font-size:.85rem;color:var(--muted)}
-    .ok{color:#8ff0a4;border-color:#8ff0a430;background:#0f2d1e}
-    .todo{color:#ffd27d;border-color:#ffd27d30;background:#2a1f0e}
-    main{position:relative;z-index:1}
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
-    @media (max-width:960px){.grid{grid-template-columns:1fr}}
-    .card{background:var(--card);border:1px solid #ffffff12;border-radius:16px;box-shadow:0 10px 40px #0004}
-    .card .pad{padding:18px}
-    h2{margin:0 0 10px 0;font-size:1.05rem;color:#fff}
-    .hint{color:var(--muted);font-size:.9rem}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-    .full{grid-column:1 / -1}
-    label{font-weight:600;font-size:.9rem;display:block;margin:.2rem 0}
-    input, textarea, select{width:100%;background:#0f1112;border:1px solid #ffffff26;color:#e9f1f5;border-radius:12px;padding:.8rem .9rem;font-size:.95rem}
-    textarea{min-height:120px;resize:vertical}
-    .kickers{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
-    .btn{padding:.8rem 1rem;border:none;border-radius:12px;font-weight:700;cursor:pointer;transition:transform .15s, box-shadow .15s, filter .2s}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px #0004}
-    .btn:active{transform:translateY(0)}
-    .btn-ghost{background:#ffffff10;color:#fff;border:1px solid #ffffff20}
-    .btn-accent{background:#fff;color:#181a1b}
-    .btn-accent.em{background:linear-gradient(90deg, var(--accent) 60%, #fff 100%)}
-    .btn-accent.pink{background:linear-gradient(90deg, var(--accent2) 60%, #fff 100%)}
-    .status{display:flex;gap:8px;flex-wrap:wrap}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
-    .receipt{min-height:260px}
-    .toolbar{display:flex;gap:10px;justify-content:flex-end}
-    .footer{opacity:.8;font-size:.85rem;margin-top:20px}
-  </style>
 </head>
 <body>
-  <canvas id="shader-bg"></canvas>
-  <header>
-    <div class="wrap">
-      <div class="brand">
-        <img src="https://simpleicons.org/icons/github.svg" alt="" width="22" height="22" aria-hidden="true"/>
-        <h1>README Prompt Workshop · NC State</h1>
-        <div class="status" id="statusBadges" style="margin-left:auto">
-          <span class="badge todo" id="geminiBadge">Gemini: Not confirmed</span>
-          <span class="badge todo" id="githubBadge">github.ncsu.edu: Not confirmed</span>
-        </div>
-      </div>
+  <!-- Animated background -->
+  <canvas id="shader-bg" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div>
+      <h1>README Prompt Builder</h1>
     </div>
+    <nav class="checks">
+      <div class="check">
+        <a href="https://gemini.google.com" target="_blank" rel="noopener">Open Gemini</a>
+        <label class="toggle">
+          <input type="checkbox" id="gemini-ok" />
+          <span>Signed in?</span>
+        </label>
+      </div>
+      <div class="check">
+        <a href="https://github.ncsu.edu" target="_blank" rel="noopener">Open github.ncsu.edu</a>
+        <label class="toggle">
+          <input type="checkbox" id="github-ok" />
+          <span>Signed in?</span>
+        </label>
+      </div>
+      <a class="ghost" href="https://desktop.github.com/" target="_blank" rel="noopener">Install GitHub Desktop</a>
+    </nav>
   </header>
 
-  <main class="wrap" style="margin-top:18px">
-    <div class="grid">
-      <!-- LEFT: Form -->
-      <section class="card">
-        <div class="pad">
-          <h2>1) Fill the worksheet</h2>
-          <p class="hint">We’re generating a <strong>prompt receipt</strong> for Gemini that will output a complete GitHub-profile <code>README.md</code>. The receipt updates live as you type.</p>
+  <main class="container">
+    <section class="panel">
+      <h2>Fill the Worksheet</h2>
 
-          <div class="row">
-            <div>
-              <label for="name">1. Name</label>
-              <input id="name" class="sync" placeholder="Jane Doe" />
-            </div>
-            <div>
-              <label for="email">2. Email</label>
-              <input id="email" class="sync" placeholder="jane@ncsu.edu" />
-            </div>
-          </div>
+      <form id="ws-form">
+        <div class="grid">
+          <label>1. Name
+            <input type="text" id="name" placeholder="e.g., Jordan Taylor" />
+          </label>
 
-          <div class="row">
-            <div>
-              <label for="linkedin">3. LinkedIn URL</label>
-              <input id="linkedin" class="sync" placeholder="https://www.linkedin.com/in/…" />
-            </div>
-            <div>
-              <label for="github">4. GitHub URL</label>
-              <input id="github" class="sync" placeholder="https://github.ncsu.edu/…" />
-            </div>
-          </div>
+          <label>2. Email
+            <input type="email" id="email" placeholder="you@ncsu.edu" />
+          </label>
 
-          <div class="row">
-            <div>
-              <label for="portfolio">5. Portfolio URL (optional)</label>
-              <input id="portfolio" class="sync" placeholder="https://yoursite.dev" />
-            </div>
-            <div>
-              <label for="field">6. Field / Major</label>
-              <input id="field" class="sync" placeholder="Design, CS, Biology…" />
-            </div>
-          </div>
+          <label>3. LinkedIn URL
+            <input type="url" id="linkedin" placeholder="https://www.linkedin.com/in/..." />
+          </label>
 
-          <div class="row">
-            <div>
-              <label for="studying">7. Studying / Learning now</label>
-              <input id="studying" class="sync" />
-            </div>
-            <div>
-              <label for="favorite">8. Favorite topic/class (and why)</label>
-              <input id="favorite" class="sync" />
-            </div>
-          </div>
+          <label>4. GitHub URL
+            <input type="url" id="github" placeholder="https://github.ncsu.edu/yourid or https://github.com/yourid" />
+          </label>
 
-          <div class="row">
-            <div>
-              <label for="activities">9. Co‑curricular activities / jobs</label>
-              <input id="activities" class="sync" />
-            </div>
-            <div>
-              <label for="hobbies">10. Hobbies / interests</label>
-              <input id="hobbies" class="sync" />
-            </div>
-          </div>
+          <label>5. Personal site/portfolio URL
+            <input type="url" id="portfolio" placeholder="https://yoursite.com" />
+          </label>
 
-          <div class="row">
-            <div>
-              <label for="skills">11. Skills</label>
-              <input id="skills" class="sync" placeholder="communication, prototyping, Python…" />
-            </div>
-            <div>
-              <label for="tools">12. Technologies / tools</label>
-              <input id="tools" class="sync" placeholder="VS Code, Blender, Unity…" />
-            </div>
-          </div>
+          <label>6. Field / Major
+            <input type="text" id="field" placeholder="e.g., Media Arts & Design" />
+          </label>
 
-          <div class="full">
-            <label for="projects">13. Projects (name + 1‑sentence + link)</label>
-            <textarea id="projects" class="sync" placeholder="Project A — brief summary — https://…\nProject B — brief summary — https://…"></textarea>
-          </div>
+          <label>7. Studying / Learning now
+            <textarea id="studying" rows="2" placeholder="What are you learning?"></textarea>
+          </label>
 
-          <div class="row">
-            <div>
-              <label for="goals">14. Current goals</label>
-              <input id="goals" class="sync" />
-            </div>
-            <div>
-              <label for="fun">15. Fun fact</label>
-              <input id="fun" class="sync" />
-            </div>
-          </div>
+          <label>8. Favorite topic/class (and why)
+            <textarea id="favorite" rows="2" placeholder="Course + why it resonates"></textarea>
+          </label>
 
-          <hr style="border:0;border-top:1px solid #ffffff20;margin:18px 0" />
+          <label>9. Co-curricular activities / jobs
+            <textarea id="activities" rows="2" placeholder="Clubs, roles, internships…"></textarea>
+          </label>
 
-          <h2>2) Personalize tone & style (optional)</h2>
-          <div class="row-3">
-            <div>
-              <label for="tone">Tone</label>
-              <select id="tone" class="sync">
-                <option value="professional">Professional</option>
-                <option value="warm">Warm professional</option>
-                <option value="confident">Confident</option>
-                <option value="minimal">Minimal</option>
-              </select>
-            </div>
-            <div>
-              <label for="emoji">Emoji level</label>
-              <select id="emoji" class="sync">
-                <option value="none">None</option>
-                <option value="light" selected>Light</option>
-                <option value="moderate">Moderate</option>
-              </select>
-            </div>
-            <div>
-              <label for="flair">Writing flourishes</label>
-              <select id="flair" class="sync">
-                <option value="concise">Concise sentences</option>
-                <option value="story">Slight narrative arc</option>
-                <option value="results" selected>Results‑oriented</option>
-              </select>
-            </div>
-          </div>
+          <label>10. Hobbies / interests
+            <textarea id="hobbies" rows="2" placeholder="What do you enjoy?"></textarea>
+          </label>
 
-          <div class="kickers">
-            <button class="btn btn-ghost" id="openGemini">Open gemini.google.com</button>
-            <button class="btn btn-ghost" id="openGithub">Open github.ncsu.edu</button>
-            <button class="btn btn-ghost" id="openDesktop">Get GitHub Desktop</button>
-          </div>
+          <label>11. Technical or creative skills
+            <textarea id="skills" rows="2" placeholder="e.g., Unity, Blender, JS, photography…"></textarea>
+          </label>
+
+          <label>12. Tools or platforms used
+            <textarea id="tools" rows="2" placeholder="e.g., GitHub Desktop, VS Code, Figma…"></textarea>
+          </label>
+
+          <label>13. Projects (name + 1-line summary + link)
+            <textarea id="projects" rows="3" placeholder="- Project Name — one sentence — https://..."></textarea>
+          </label>
+
+          <label>14. Current goals
+            <textarea id="goals" rows="2" placeholder="1–2 bullets you'll pursue next"></textarea>
+          </label>
+
+          <label>15. Fun fact
+            <input type="text" id="funfact" placeholder="A quick, authentic detail" />
+          </label>
         </div>
-      </section>
 
-      <!-- RIGHT: Live Prompt Receipt -->
-      <section class="card">
-        <div class="pad">
-          <h2>3) Prompt Receipt (copy & paste into Gemini)</h2>
-          <p class="hint">This is the exact prompt you’ll submit. It updates <strong>live</strong>.</p>
-          <textarea id="promptReceipt" class="mono receipt" readonly></textarea>
-          <div class="toolbar" style="margin-top:10px">
-            <button class="btn btn-accent em" id="copyPrompt">Copy Prompt</button>
-            <button class="btn btn-accent" id="downloadPrompt">Download .txt</button>
-          </div>
+        <fieldset class="prefs">
+          <legend>Style Preferences (baked into the prompt, Gemini renders Markdown)</legend>
+          <label>Tone
+            <select id="tone">
+              <option value="professional, friendly">Professional, friendly</option>
+              <option value="enthusiastic, maker-oriented">Enthusiastic, maker-oriented</option>
+              <option value="concise, minimal">Concise, minimal</option>
+              <option value="academic, research-focused">Academic, research-focused</option>
+            </select>
+          </label>
 
-          <p class="footer">
-            After Gemini returns your Markdown, create a repo (or your <code>username.github.io</code> site) on <a href="https://github.ncsu.edu/" target="_blank">github.ncsu.edu</a>, add a <code>README.md</code>, and paste.
-          </p>
+          <label>Emoji usage
+            <select id="emoji">
+              <option value="moderate">Moderate</option>
+              <option value="minimal">Minimal</option>
+              <option value="none">None</option>
+              <option value="expressive">Expressive</option>
+            </select>
+          </label>
+
+          <label>Sentence length preference
+            <select id="sentences">
+              <option value="balanced">Balanced</option>
+              <option value="short">Short</option>
+              <option value="varied">Varied</option>
+            </select>
+          </label>
+
+          <label>Jargon tolerance
+            <select id="jargon">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" id="copyPrompt" class="primary">Copy Prompt</button>
+          <a class="secondary" href="https://gemini.google.com" target="_blank" rel="noopener">Open Gemini</a>
+          <a class="secondary" href="https://github.ncsu.edu/new" target="_blank" rel="noopener">Create Repo @ github.ncsu.edu</a>
         </div>
-      </section>
-    </div>
+      </form>
+    </section>
+
+    <section class="panel receipt">
+      <h2>Prompt Receipt (Generated Live)</h2>
+      <textarea id="receipt" readonly></textarea>
+      <p class="hint">Copy this into Gemini. Gemini will return the final Markdown README.</p>
+    </section>
   </main>
 
-  <script>
-  // ===== Subtle animated background (fast, tiny shader-less canvas) =====
-  (function bg() {
-    const c = document.getElementById('shader-bg');
-    const ctx = c.getContext('2d');
-    function size(){c.width = innerWidth; c.height = innerHeight}
-    addEventListener('resize', size, {passive:true}); size();
-    let t=0; function loop(){
-      const {width:w,height:h}=c; const g=ctx.createRadialGradient(
-        w*0.5+Math.sin(t*0.0015)*80,
-        h*0.45+Math.cos(t*0.0012)*60,
-        50,
-        w*0.5, h*0.5, Math.max(w,h)
-      );
-      g.addColorStop(0,'#202426');
-      g.addColorStop(1,'#0e0f10');
-      ctx.fillStyle=g; ctx.fillRect(0,0,w,h); t+=16; requestAnimationFrame(loop);
-    } loop();
-  })();
+  <footer class="footer">
+    <p>NC State Libraries • Intro to Version Control & Creative Coding</p>
+  </footer>
 
-  // ===== Sign-in confirmation badges (local only) =====
-  const geminiBadge = document.getElementById('geminiBadge');
-  const githubBadge = document.getElementById('githubBadge');
-  const openGemini = document.getElementById('openGemini');
-  const openGithub = document.getElementById('openGithub');
-  const openDesktop = document.getElementById('openDesktop');
-  function updateBadges(){
-    const g = localStorage.getItem('geminiConfirmed')==='1';
-    const gh = localStorage.getItem('githubConfirmed')==='1';
-    geminiBadge.className = 'badge ' + (g?'ok':'todo');
-    geminiBadge.textContent = 'Gemini: ' + (g?'Confirmed':'Not confirmed');
-    githubBadge.className = 'badge ' + (gh?'ok':'todo');
-    githubBadge.textContent = 'github.ncsu.edu: ' + (gh?'Confirmed':'Not confirmed');
-  }
-  updateBadges();
-  openGemini.addEventListener('click', ()=>{ window.open('https://gemini.google.com/app','_blank'); if(confirm('Mark Gemini as confirmed?')){ localStorage.setItem('geminiConfirmed','1'); updateBadges(); }});
-  openGithub.addEventListener('click', ()=>{ window.open('https://github.ncsu.edu/','_blank'); if(confirm('Mark GitHub Enterprise as confirmed?')){ localStorage.setItem('githubConfirmed','1'); updateBadges(); }});
-  openDesktop.addEventListener('click', ()=>{ window.open('https://desktop.github.com','_blank'); });
-
-  // ===== LIVE PROMPT RECEIPT =====
-  const ids = ['name','email','linkedin','github','portfolio','field','studying','favorite','activities','hobbies','skills','tools','projects','goals','fun','tone','emoji','flair'];
-  const els = Object.fromEntries(ids.map(id=>[id, document.getElementById(id)]));
-  for (const id of ids) els[id].addEventListener('input', renderPrompt);
-
-  function line(label, val){ return val?`\n${label} ${val}`:'' }
-
-  function renderPrompt(){
-    const P = [];
-    // Header instruction block (verbatim, with your structure)
-    P.push(
-`Create a polished, upload-ready \`README.md\` for a GitHub profile using the data below. Use clean, valid GitHub-flavored Markdown. Do not use placeholders like \`[Your link here]\`; omit sections without content. Follow this structure exactly:\n\n1. \`#\` H1 title with name\n2. Contact block: Email and Markdown links to GitHub, LinkedIn, Portfolio\n3. \`## 🧠 About Me\` – Write 3–5 sentence paragraph\n4. \`## 🔍 Projects & Passions\` – Bullet list: \`- **[Project Name](link)** – 1-sentence summary\`\n5. \`## ⚙️ Tools & Skills\` – Two bullets: \`**Skills:**\` and \`**Technologies:**\`\n6. \`## 🎯 Goals\` – 1–2 bullets\n7. \`## 🎉 Fun Fact\` – 1 bullet\n\nPersonalization: Tone=${els.tone.value}; Emoji=${els.emoji.value}; Writing style=${els.flair.value}. Avoid clichés and filler. Prefer plain English, active voice, and specific details. If any inputs are blank, omit that line/section entirely.\n\n### Input:\n### Fill out and paste below:`);
-
-    // Worksheet values (only non-empty lines included)
-    P.push(line('1. Name:', els.name.value.trim()));
-    P.push(line('2. Email:', els.email.value.trim()));
-    P.push(line('3. LinkedIn URL:', els.linkedin.value.trim()));
-    P.push(line('4. GitHub URL:', els.github.value.trim()));
-    P.push(line('5. Personal site/portfolio URL (if any):', els.portfolio.value.trim()));
-    P.push(line('6. Field or major:', els.field.value.trim()));
-    P.push(line('7. What are you studying or learning now?', els.studying.value.trim()));
-    P.push(line('8. Favorite topic or class (and why):', els.favorite.value.trim()));
-    P.push(line('9. Co-curricular activities or jobs:', els.activities.value.trim()));
-    P.push(line('10. Hobbies/interests:', els.hobbies.value.trim()));
-    P.push(line('11. Technical or creative skills:', els.skills.value.trim()));
-    P.push(line('12. Tools or platforms used:', els.tools.value.trim()));
-    if(els.projects.value.trim()){
-      P.push('\n13. Projects you\'re proud of (name + 1-sentence summary + link if any):');
-      P.push(els.projects.value.trim());
-    }
-    P.push(line('14. Current goals:', els.goals.value.trim()));
-    P.push(line('15. Fun fact:', els.fun.value.trim()));
-
-    document.getElementById('promptReceipt').value = P.filter(Boolean).join('\n');
-  }
-  renderPrompt();
-
-  // ===== Copy & Download =====
-  document.getElementById('copyPrompt').addEventListener('click', async ()=>{
-    const t = document.getElementById('promptReceipt');
-    t.select(); t.setSelectionRange(0, 999999);
-    try { await navigator.clipboard.writeText(t.value); alert('Prompt copied to clipboard!'); }
-    catch(e){ document.execCommand('copy'); alert('Prompt copied.'); }
-  });
-
-  document.getElementById('downloadPrompt').addEventListener('click', ()=>{
-    const blob = new Blob([document.getElementById('promptReceipt').value], {type:'text/plain'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'readme_prompt.txt';
-    document.body.appendChild(a); a.click(); a.remove();
-  });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
