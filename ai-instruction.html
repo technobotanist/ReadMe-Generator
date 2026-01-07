@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NCSU • AI Instruction Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .panel h3 { margin-top: 2rem; color: var(--accent); }
+    .panel h4 { margin-top: 1.5rem; color: var(--text); }
+    .panel ul, .panel ol { line-height: 1.6; color: var(--muted); }
+    .panel li { margin-bottom: 0.5rem; }
+    .panel p { line-height: 1.6; color: var(--muted); }
+    .example-box { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 8px; border: 1px solid #1b1f24; margin-top: 1rem; }
+    .example-box h1 { font-size: 1.8rem; margin-top: 0; color: var(--text); border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
+    .example-box h2 { font-size: 1.4rem; color: var(--text); border-bottom: 1px solid #30363d; padding-bottom: 0.3rem; margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <!-- Animated background -->
+  <canvas id="shader-bg" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div>
+      <h1>NCSU AI Instruction Index</h1>
+    </div>
+    <nav class="checks">
+      <a href="index.html" class="check" style="text-decoration:none; color:var(--text); font-weight:600;">← Back to Generator</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>Spring 2026 Workshop: Coding Your First Public Portfolio Website</h2>
+      <p><strong>90 Minutes - March 2025, April 2025 - GEL</strong></p>
+      
+      <h3>▸ Context / Assumptions</h3>
+      <ul>
+        <li><strong>Audience:</strong> Students with no prior coding experience. No use of GitHub or git for versioning or tracking changes initially.</li>
+        <li><strong>Goal:</strong> Demystify version control and the project initiation process using GitHub and VS Code.</li>
+        <li><strong>Key Tool:</strong> Web-based <a href="https://technobotanist.github.io/ReadMe-Generator/" target="_blank">README Generator</a> for guided content creation.</li>
+        <li><strong>Environment:</strong> GitHub Desktop + VS Code + GitHub Pages + Gemini as support.</li>
+      </ul>
+
+      <h3>▸ One-Page Workshop Outline: “Getting Started with GitHub & Version Control”</h3>
+      <p>⏱ <strong>Total Duration:</strong> 50 minutes<br>
+      📍 <strong>Outcome:</strong> Each student publishes a personalized README file to GitHub Pages, using version control to manage changes.</p>
+      
+      <hr style="border-color: #30363d; margin: 2rem 0;">
+
+      <h4>1. Welcome & Setup (5 mins)</h4>
+      <ul>
+        <li><strong>Framing Questions:</strong>
+          <ul>
+            <li>What is version control?</li>
+            <li>Why do creative professionals use GitHub?</li>
+          </ul>
+        </li>
+        <li><strong>Glossary Preview:</strong> Distribute or link to prebuilt <code>glossary.md</code> (clone from GitHub)</li>
+        <li><strong>Learning Goals:</strong>
+          <ul>
+            <li>Understand version control, repos, commits, and the dev lifecycle.</li>
+            <li>Gain hands-on practice in initializing, editing, and publishing a project.</li>
+            <li>Identify NC State resources: Gemini, GitHub Enterprise Cloud.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h4>2. Launch the Generator & Customize (10 mins)</h4>
+      <ul>
+        <li>Visit: <a href="https://technobotanist.github.io/ReadMe-Generator/" target="_blank">README Generator</a></li>
+        <li>Fill out guided prompts: background, interests, goals, links.</li>
+        <li>Generate and copy the completed Markdown README.</li>
+        <li>Discuss how this mirrors common team onboarding & project kickoff documentation.</li>
+      </ul>
+
+      <h4>3. GitHub Setup & Repo Workflow (15 mins)</h4>
+      <ul>
+        <li><strong>Create a new repository on GitHub:</strong>
+          <ul>
+            <li>Title: <code>personal-readme</code></li>
+            <li>Add <code>.gitignore</code> and license (optional)</li>
+          </ul>
+        </li>
+        <li><strong>Open GitHub Desktop:</strong>
+          <ul>
+            <li>Clone new repo.</li>
+            <li>Open in VS Code.</li>
+          </ul>
+        </li>
+        <li>Paste & Save the <code>README.md</code> content.</li>
+        <li>Make a Commit → Push to GitHub.</li>
+      </ul>
+
+      <h4>4. Publish via GitHub Pages (10 mins)</h4>
+      <ul>
+        <li>Go to repo Settings → Pages → Enable Pages (root, main branch).</li>
+        <li>Share live personal profile URL.</li>
+        <li>Optionally: inspect commit history to reinforce version tracking.</li>
+      </ul>
+
+      <h4>5. Debrief & Q&A (10 mins)</h4>
+      <ul>
+        <li>What did you learn about version control?</li>
+        <li>What could you see using this for in your own projects?</li>
+        <li>Where can you get help?
+          <ul>
+            <li>Gemini (gemini.google.com) for prompting</li>
+            <li>NC State Libraries</li>
+            <li>GitHub Docs</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="border-color: #30363d; margin: 2rem 0;">
+
+      <h3>▸ Devil’s-Advocate / Risks</h3>
+      <ul>
+        <li><strong>Tool Overlap:</strong> Juggling GitHub Desktop, VS Code, web tools may overwhelm novices.</li>
+        <li><strong>Time Creep:</strong> Authentication, app installs, and GitHub Pages setup often require more time than expected.</li>
+        <li><strong>Shallow Conceptual Anchoring:</strong> Students may go through motions without grasping why version control matters—need to reinforce definitions often.</li>
+      </ul>
+
+      <h3>▸ Possible Next Steps</h3>
+      <ul>
+        <li>Pre-cloneable repo scaffold with <code>README.md</code>, <code>glossary.md</code>, and <code>instructions.md</code>.</li>
+        <li>One-page PDF quickstart sheet for GitHub Desktop flow.</li>
+        <li>Evaluate session impact with optional feedback form or second session follow-up.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Virtual Gameday Wardrobe Simulator</h2>
+      <p><strong>Workshop by Laquanda Fields & Alex Valencia</strong></p>
+      <p>A fashion and lifestyle-focused workshop designed to show students how to manifest and demo ideas quickly with AI. The team built a "virtual gameday wardrobe" simulator using Gemini as a proof-of-concept.</p>
+      <p>
+        <a href="https://lmfields1201.github.io/Wardrobe/" target="_blank" style="color:var(--accent); font-weight:bold;">View Live Demo →</a>
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Critical Play with AI</h2>
+      <p><strong>Presentation at ACRL</strong></p>
+      <p>Slides from our presentation on "Critical Play with AI" at the Association of College & Research Libraries conference.</p>
+      <p>
+        <a href="https://docs.google.com/presentation/d/1tNc6swdE9iE1m_UOpHPLV2YGXtqjqychBHOxQo2aX6c/edit?usp=sharing" target="_blank" style="color:var(--accent); font-weight:bold;">View Slides →</a>
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>StudiosLLM: A Privacy-Aware LLM-Powered Discord Assistant</h2>
+      <p><strong>Transforming Information: Libraries in the Age of AI</strong><br>
+      New York University Libraries, Abu Dhabi, UAE • Nov 18, 2025</p>
+      <p>Presented by Colin Patrick Keenan.</p>
+      <p>StudiosLLM is a locally managed AI assistant integrated into Discord, developed in collaboration with graduate student Varad Patwardhan to support experiential learning studios at NC State University. The system indexes internal documentation and scheduling APIs using a retrieval-augmented pipeline, routing queries to OpenAI’s GPT-5 for citation-supported responses. Staff interact with the assistant via direct mentions or emoji triggers, allowing for precise guidance that complements human expertise. A privacy-aware SHA3-512 redundancy protocol ensures efficient incremental updates while preserving on-premise data security. This architecture demonstrates how modular design and vector-backed retrieval can enable secure AI deployment in academic environments.</p>
+      <p>
+        <a href="https://nyu.zoom.us/rec/play/P-lWgquxsSoMvJQX5F1FH7DXrhAcBgVNz0ozAqDUl-aKLYMo-nmeiDykGvrLqM_y9ACXQuotHRjlj1Fw.ZVQP22z8XdCYR-GS?eagerLoadZvaPages=&accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fnyu.zoom.us%2Frec%2Fshare%2FEvf-VLVnPHgPoU4S8hm1nFNU77jU5P9DVOGQPYuaGbRv9qKiKLUQEXJjnoZ5X4E.4TBIK5-T-v9HDQwL" target="_blank" style="color:var(--accent); font-weight:bold;">Watch Recording →</a>
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>AI and the Future of Personal Computing</h2>
+      <p><strong>NC Live</strong> • Aug 5, 2024</p>
+      <p>Presented by Colin P. Keenan. Discusses implications for libraries, personal computing, and the future of work.</p>
+      <p>
+        <a href="https://www.youtube.com/watch?v=mt7eClWSvOg" target="_blank" style="color:var(--accent); font-weight:bold;">Watch on YouTube →</a>
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>GitHub Profile README Worksheet</h2>
+      <p>Create a polished, upload-ready <code>README.md</code> for a GitHub profile using the data below. Use clean, valid GitHub-flavored Markdown. Do not use placeholders like <code>[Your link here]</code>; omit sections without content. Follow this structure exactly:</p>
+      <ul>
+        <li><code>#</code> H1 title with name</li>
+        <li>Contact block: Email and Markdown links to GitHub, LinkedIn, Portfolio</li>
+        <li><code>## 🧠 About Me</code> – Write 3–5 sentence paragraph</li>
+        <li><code>## 🔍 Projects & Passions</code> – Bullet list: <code>- **[Project Name](link)** – 1-sentence summary</code></li>
+        <li><code>## ⚙️ Tools & Skills</code> – Two bullets: <code>**Skills:**</code> and <code>**Technologies:**</code></li>
+        <li><code>## 🎯 Goals</code> – 1–2 bullets</li>
+        <li><code>## 🎉 Fun Fact</code> – 1 bullet</li>
+      </ul>
+
+      <h3>Fill out and paste below:</h3>
+      <ol>
+        <li><strong>Name:</strong> “Hi, my name is _______.”</li>
+        <li><strong>Major:</strong> “I’m majoring in _______.”</li>
+        <li><strong>What you’re studying now:</strong> “Right now, I’m learning about _______.”</li>
+        <li><strong>Favorite class or topic:</strong> “My favorite class so far is _______ because _______.”</li>
+        <li><strong>Co-curricular activities:</strong> “Outside of class, I’m involved in _______.”</li>
+        <li><strong>Hobbies / interests:</strong> “In my free time, I enjoy _______.”</li>
+        <li><strong>Skills or areas of expertise:</strong> “I would say I have strong skills in _______.”</li>
+        <li><strong>Tools or technologies you use:</strong> “I often use _______ to do my work.”</li>
+        <li><strong>Current passion project:</strong> “Something I’m really passionate about right now is _______.”</li>
+        <li><strong>Future goals:</strong> “One thing I’d like to do in the future is _______.”</li>
+        <li><strong>Fun fact:</strong> “A fun fact about me is _______.”</li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2>Examples</h2>
+      
+      <div class="example-box">
+        <h1>👋 Hi, I’m David Woodbury</h1>
+        <p><strong>Information Science Professional | Project Builder | Team Mentor</strong></p>
+        <p>📍 Based in the U.S.<br>
+        🌐 <a href="#">LinkedIn</a> · 📝 <a href="#">Website/Portfolio</a><br>
+        📫 Reach me: <a href="mailto:dnwoodbu@ncsu.edu">dnwoodbu@ncsu.edu</a></p>
+        <hr>
+        <h2>🧠 About Me</h2>
+        <p>I hold a <strong>Masters in Information Science</strong> and bring curiosity to everything I do. Right now, I’m exploring intersections between <strong>AI, the human potential movement, Scotland, and bikepacking</strong>. I’ve found deep joy in <strong>art therapy</strong>, especially in learning instructional approaches that allow people to be fully present. Outside of work, I stay grounded by supporting my daughters’ cross country team as a team parent, traveling, enjoying good food, and catching live music.</p>
+        <h2>🔍 Projects & Passions</h2>
+        <ul>
+          <li>Helping people learn how to use technology to solve real problems</li>
+          <li>Building and supporting communities that grow through collaboration</li>
+          <li>Exploring new ways to merge creativity, technology, and human connection</li>
+        </ul>
+        <h2>⚙️ Tools & Skills</h2>
+        <ul>
+          <li><strong>Core Expertise:</strong> Management, project management, budgeting, starting and leading complex projects</li>
+          <li><strong>Tools I Use Regularly:</strong> ChatGPT, Google Sheets, Trello, and more</li>
+          <li><strong>Strengths:</strong> Strategy, collaboration, curiosity-driven learning</li>
+        </ul>
+        <h2>🎯 Goals</h2>
+        <ul>
+          <li>Gain more experience in <strong>fundraising and development</strong></li>
+          <li>Keep finding ways to bring technology and people together</li>
+          <li>Continue expanding personal and professional horizons</li>
+        </ul>
+        <h2>🎉 Fun Fact</h2>
+        <p>I’ve lived in <strong>nine different U.S. states</strong> — and I carry pieces of each one with me.</p>
+      </div>
+
+      <div class="example-box">
+        <h1>Colin Patrick Keenan</h1>
+        <p align="center">
+          <a href="mailto:keenanco@gmail.com">Email</a> •
+          <a href="https://github.com/technobotanist">GitHub</a> •
+          <a href="https://www.linkedin.com/in/colinkeenan">LinkedIn</a> •
+          <a href="https://technobotanist.github.io">Portfolio</a>
+        </p>
+        <hr>
+        <h2>🧠 About Me</h2>
+        <p>I'm a researcher specializing in Plant Biology and Biomathematics, passionate about modeling natural systems with computers. My academic journey has taught me the fascinating connection between a plant’s genetics and its visible characteristics. Currently, I'm diving into plant metabolics, 3D imaging, and the agronomy of advanced cropping systems to better understand and anticipate how plants respond to their environment. My favorite class, Plant Systematics, taught me to see every plant I encounter as part of a larger, interconnected family, revealing new relationships and patterns in the natural world.</p>
+        <h2>🔍 Projects & Passions</h2>
+        <ul>
+          <li>Understanding 3D root topography – Modeling and anticipating the 3D topography of nutrient-seeking root systems.</li>
+        </ul>
+        <h2>⚙️ Tools & Skills</h2>
+        <ul>
+          <li><strong>Skills:</strong> coding, writing, teamwork, statistical analysis, GIS mapping, research</li>
+          <li><strong>Technologies:</strong> R statistics engine, large language models, Adobe Creative Cloud</li>
+        </ul>
+        <h2>🎯 Goals</h2>
+        <ul>
+          <li>Use computers to model natural systems in a meaningful way.</li>
+          <li>Apply computational methods to advance agricultural and biological research.</li>
+        </ul>
+        <h2>🎉 Fun Fact</h2>
+        <ul>
+          <li>I'm the best quadball player in the Northeastern USA.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>NC State Libraries • AI Instruction Index</p>
+  </footer>
+
+  <script src="shader.js"></script>
+</body>
+</html>
